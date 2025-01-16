@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "reactfire";
+import { createUserDocument } from '@/lib/firebase/firestore';
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -46,9 +47,10 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onShowLogin, onSignUp }) => {
   const signup = async ({ email, password }: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      if (user?.user.uid && user.user.email) {
-        // create user in firestore here if you want
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      if (userCredential?.user.uid && userCredential.user.email) {
+        // Create the user document in Firestore
+        await createUserDocument(userCredential.user.uid, userCredential.user.email);
         toast({ title: "Account created!" });
         onSignUp?.();
       }

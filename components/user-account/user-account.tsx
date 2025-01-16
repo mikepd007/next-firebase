@@ -1,6 +1,6 @@
 'use client'
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,6 +16,13 @@ export const UserAccount: FC = () => {
   const { data: user, status } = useUser();
   const router = useRouter();
 
+  // Handle authentication redirect in useEffect
+  useEffect(() => {
+    if (status !== 'loading' && !user) {
+      router.push('/login');
+    }
+  }, [user, status, router]);
+
   // Handle loading state
   if (status === 'loading') {
     return (
@@ -25,9 +32,8 @@ export const UserAccount: FC = () => {
     );
   }
 
-  // Handle not authenticated
+  // Return null if not authenticated (redirect will happen in useEffect)
   if (!user) {
-    router.push('/login');
     return null;
   }
 
