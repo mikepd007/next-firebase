@@ -21,7 +21,10 @@ export const NavbarUserLinks: FC = () => {
         </>
       ) : (
         <>
-          <Link href="/login" className={buttonVariants()}>
+          <Link href="#" className={buttonVariants()}>
+            Install Extension
+          </Link>
+          <Link href="/login" className={buttonVariants({ variant: "outline" })}>
             Login / Register &rarr;
           </Link>
         </>

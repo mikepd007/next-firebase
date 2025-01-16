@@ -19,20 +19,24 @@ export const ProviderLoginButtons: FC<Props> = ({ onSignIn }) => {
   const auth = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
-  const doProviderSignIn = async (provider: GoogleAuthProvider) => {
+  const doProviderSignIn = async (provider: GoogleAuthProvider | GithubAuthProvider) => {
     try {
       setIsLoading(true);
       await signInWithPopup(auth, provider);
-      // create user in your database here
-      toast({ title: "Signed in!" });
+      toast({ title: "Signed in successfully!" });
       onSignIn?.();
     } catch (err: any) {
       console.error(err);
-      toast({ title: "Error signing in", description: `${err}` });
+      toast({ 
+        title: "Error signing in", 
+        description: err.message || `${err}`,
+        variant: "destructive"
+      });
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <>
       <Button
@@ -40,11 +44,7 @@ export const ProviderLoginButtons: FC<Props> = ({ onSignIn }) => {
         disabled={isLoading}
         onClick={async () => {
           const provider = new GoogleAuthProvider();
-          toast({
-            title: "Oops!",
-            description: "Provider not configured, yet.",
-          });
-          // await doProviderSignIn(provider);
+          await doProviderSignIn(provider);
         }}
       >
         <svg

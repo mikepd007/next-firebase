@@ -15,13 +15,12 @@ import { getAnalytics } from "firebase/analytics";
 import { FirebaseOptions } from "firebase/app";
 
 const config: FirebaseOptions = {
-  apiKey: "AIzaSyDnVqs8TBiIicdOcqb5WWqCUDB_GMywzs4",
-  authDomain: "venefish-4b609.firebaseapp.com",
-  projectId: "venefish-4b609",
-  storageBucket: "venefish-4b609.appspot.com",
-  messagingSenderId: "976336889830",
-  appId: "1:976336889830:web:030a5e0b9e6053da961827",
-  measurementId: "G-GFMBQQW6PC",
+  apiKey: "AIzaSyDfdNsInB0BppHKkN090HSXHv3NpWi6T9g",
+  authDomain: "prompter-x-base.firebaseapp.com",
+  projectId: "prompter-x-base",
+  storageBucket: "prompter-x-base.firebasestorage.app",
+  messagingSenderId: "726678256482",
+  appId: "1:726678256482:web:4e8988bf6529a530608a3b"
 };
 
 const FirebaseProviderSDKs: FC<{ children: ReactNode }> = ({ children }) => {

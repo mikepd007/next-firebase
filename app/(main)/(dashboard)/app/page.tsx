@@ -1,10 +1,5 @@
-import { DemoDashboard } from "@/components/demo-dashboard/demo-dashboard";
+import { UserAccount } from "@/components/user-account/user-account";
 
-const ApplicationPage = () => {
-  return (
-    <>
-      <DemoDashboard />
-    </>
-  );
-};
-export default ApplicationPage;
+export default function DashboardPage() {
+  return <UserAccount />;
+}
